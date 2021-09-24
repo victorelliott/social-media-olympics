@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Social Media Olympics </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="socialMediaOlympics.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script src="util.js"></script>
+    <script>
+        function Subreddit(url, date, desc, img)
+        {
+            this.url = url;
+            this.date = date;
+            if (desc != "")
+            {
+                this.desc = "\"" + desc + "\"";
+            }
+            else 
+            {
+                this.desc = "This subreddit does not have a description.";
+            }
+            this.img = "<img src='" + img + "' class='subIcon'/>"
+        }
+        
+        function parseDate(timestamp)
+        {
+            return new Date(timestamp * 1000).toLocaleDateString("en-US");
+        }
+
+        // Display the information of two random subreddits.
+        function displaySubreddits(subreddits, numSubreddits)
+        {
+            var i1 = getNumInRange(0, numSubreddits - 1);
+            var i2 = getNumInRange(0, numSubreddits - 1);
+            while (i1 == i2)
+            {
+                i2 = getNumInRange(0, numSubreddits - 1);
+            }
+            s1 = subreddits[i1];
+            s2 = subreddits[i2];
+
+            document.getElementById("left_name").innerHTML = s1.url;
+            document.getElementById("left_date").innerHTML = s1.date;
+            document.getElementById("left_desc").innerHTML = s1.desc;
+
+            document.getElementById("right_name").innerHTML = s2.url;
+            document.getElementById("right_date").innerHTML = s2.date;
+            document.getElementById("right_desc").innerHTML = s2.desc;
+        }
+
+        // Check if the answer is correct.
+        function compare(answer, other, subreddits, noClick)
+        {
+            noClick.noclick = true;
+            var answerCount = parseInt(document.getElementById(answer).innerHTML);
+            var otherCount = parseInt(document.getElementById(other).innerHTML);
+            var answerStyle = document.getElementById(answer).style;
+            var otherStyle = document.getElementById(other).style;
+            var red = "#e64949";
+            var green = "#47c938";
+            var black = "#000000";
+            
+            document.getElementById(answer).innerHTML = parseDate(answerCount);
+            document.getElementById(other).innerHTML = parseDate(otherCount);
+            answerStyle.display = "block";
+            otherStyle.display = "block";
+            if (answerCount > otherCount)
+            {
+                answerStyle.color = red;
+                otherStyle.color = green;
+                setTimeout(function()
+                {
+                    noClick.noclick = false;
+                    answerStyle.display = "none";
+                    otherStyle.display = "none";
+                    answerStyle.color = black;
+                    otherStyle.color = black;
+                    document.getElementById("score_form").submit();
+                }, 3000);
+            }
+            else
+            {
+                increaseScore();
+                answerStyle.color = green;
+                otherStyle.color = red;
+                setTimeout(function()
+                {
+                    noClick.noclick = false;
+                    answerStyle.display = "none";
+                    otherStyle.display = "none";
+                    answerStyle.color = black;
+                    otherStyle.color = black;
+                    displaySubreddits(subreddits, subreddits.length);
+                }, 3000);
+            }
+        }
+
+        // Assumes HTML is formatted as such: "# [SCORE]".
+        function increaseScore()
+        {
+            score = parseInt(document.getElementById("score").innerHTML);
+            document.getElementById("score").innerHTML = ++score;
+            document.getElementById("hidden_score").value = score;
+            $(".scoreCircle").fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+        }
+
+        window.onload = function()
+        {
+            subreddits = [];
+            var request = new XMLHttpRequest();
+            request.open("GET", "https://www.reddit.com/subreddits/popular.json?limit=100", true);
+            request.onreadystatechange = function()
+            {
+                if (request.readyState == 4 && request.status == 200)
+                {
+                    var response = JSON.parse(request.responseText);
+                    var subredditsJSON = response["data"]["children"];
+                    subredditsJSON.forEach(function(subreddit)
+                    {
+                        var subData = subreddit["data"];
+                        var url = subData["display_name"];
+                        var img = subData["icon_img"];
+                        var desc = subData["public_description"];
+                        var date = subData["created_utc"];
+                        subreddits.push(new Subreddit(url, date, desc, img));
+                    });
+                    displaySubreddits(subreddits, subreddits.length);
+                    
+                    var noClick = new NoClick();
+                    document.getElementById("left").onclick = function()
+                    {
+                        if (!noClick.noclick)
+                        {
+                            compare("left_date", "right_date", subreddits, noClick);
+                        }
+                    }
+                    document.getElementById("right").onclick = function()
+                    {
+                        if (!noClick.noclick)
+                        {
+                            compare("right_date", "left_date", subreddits, noClick);
+                        }
+                    }
+                }
+            }
+            request.send();
+        }
+    </script>
+</head>
+
+<body>
+
+  <a href="index.html">
+    <p>
+      <img src="icon.png" height=70px>
+        <!-- should fix color and background checkered-ness -->
+      <h1> Social Media Olympics </h1>
+    </p>
+  </a>
+
+  <div class="blue2">
+    <div class="question">
+        Which subreddit was created first? <br>
+        <div class="scoreCircle">
+          <br> Score:
+          <div id="score">0</div>
+        </div>
+    </div>
+
+    <div class="left" id="left">
+        <div id="left_name">&nbsp</div>
+        <div id="left_desc">&nbsp</div>
+        <div id="left_date" style="display: none">&nbsp</div>
+    </div>
+
+    <div class="right" id="right">
+        <div id="right_name">&nbsp</div>
+        <div id="right_desc">&nbsp</div>
+        <div id="right_date" style="display: none">&nbsp</div>
+    </div>
+  </div>
+
+  <form method="get" action="endPage.php" id="score_form">
+      <input type="hidden" id="hidden_score" name="hidden_score" value="0">
+  </form>
+
+</body>
+</html>

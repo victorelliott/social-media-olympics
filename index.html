@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Social Media Olympics </title>
+    <link rel="stylesheet" href="socialMediaOlympics.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script>
+        window.onload = function()
+        {
+            function launchGame(site, desc)
+            {
+                document.getElementById("site").value = site;
+                document.getElementById("desc").value = desc;
+                document.getElementById("form").submit();
+            }
+
+            function changeTextLoading(id)
+            {
+                document.getElementById(id).innerHTML = "Loading...";
+                document.getElementById(id).style.backgroundColor = "#bfb6b4";
+            }
+
+            document.getElementById("instagram").onclick = function()
+            {
+                changeTextLoading("instagram");
+                launchGame("the-most-followed-instagram-profiles",
+                           "Which Instagram account has more followers?");
+
+            }
+            document.getElementById("twitter").onclick = function()
+            {
+                changeTextLoading("twitter");
+                launchGame("the-most-followed-twitter-profiles",
+                           "Which Twitter account has more followers?");
+            }
+            document.getElementById("youtube").onclick = function()
+            {
+                changeTextLoading("youtube");
+                launchGame("the-most-subscribed-youtube-users",
+                           "Which YouTube channel has more subscribers?");
+            }
+            document.getElementById("twitch").onclick = function()
+            {
+                changeTextLoading("twitch");
+                launchGame("the-most-followed-twitch-channels",
+                           "Which Twitch channel has more followers?");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <a href="index.html">
+        <p>
+            <img src="icon.png" height=70px>
+            <!-- should fix color and background checkered-ness -->
+            <h1> Social Media Olympics </h1>
+        </p>
+    </a>
+    <p class="blue">
+        <a href="gamePageSubscr.html" id="reddit_subs">
+            <button class="subscr"> Reddit Subscribers  </button>
+        </a>
+        <a href="gamePageDate.html" id="reddit_date">
+            <button class="date"> Reddit Chronology </button>
+        </a>
+        <!--
+            These four buttons cannot be inside links for them to work.
+            Currently, the one closest to the bottom appears on top in the page.
+            They all have the same class since I didn't want to mess up the
+            styling.
+        -->
+        <button class="insta" id="instagram"> Instagram Followers   </button>
+        <button class="twitter"> Twitter Followers   </button>
+        <button class="youtube"> Youtube Subscribers   </button>
+        <button class="twitch"> Twitch Followers   </button>
+        <div class= "instaDescr">
+          Guess which popular instagram account has more followers
+        </div>
+        <div class= "subscrDescr">
+          Guess which popular subreddit has more subscribers
+        </div>
+        <div class= "dateDescr">
+          Guess which popular subreddit was created first
+        </div>
+        <div class= "twitterDescr">
+          Guess which popular twitter account has more followers
+        </div>
+        <div class= "youtubeDescr">
+          Guess which popular youtuber has more subscribers
+        </div>
+        <div class= "twitchDescr">
+          Guess which popular twitch channel account has more followers
+        </div>
+    </p>
+    <p class="descr">
+        Click on one of the game modes above to access the Social Media Olympics.
+        Hours of fun guessing
+        games based on popular social media accounts and posts.
+    </p>
+    <form id="form" method="post" action="process.php">
+        <input id="site" name="site" type="hidden">
+        <input id="desc" name="desc" type="hidden">
+    </form>
+</body>
+</html>
+
+<!-- TODO:
+
+  1) fix description at bottom of homepage
+  2) make more adaptable to multiple minigames?
+  3) write code that will ask the user at the bottom of the game box which
+     option they choose, and will go to another (appropriate?) page when clicked
+      form?
+      buttons?
+      form where two buttons are submit buttons with different actions?
+  4) when wrong, have box pop up that displays game over message
+     and asks user to enter their name
+  5) create streak tracker
+  6) display leaderboard
+
+ -->

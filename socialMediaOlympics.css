@@ -1,0 +1,258 @@
+img {
+  position: absolute;
+  float: left;
+  margin-top: -10px;
+}
+
+h1 {
+    position: relative;
+    margin-left: 110px;
+    margin-top: 20px;
+    font-family: 'Roboto';
+
+}
+
+
+.blue {
+  width: 92%;
+  margin-left: 4%;
+  margin-right: 4%;
+  background: rgb(166,233,255);
+  background: radial-gradient(circle, rgba(166,233,255,1) 0%, rgba(39,121,255,1) 100%);
+  height: 650px;
+  position: relative;
+  margin-top: 40px;
+}
+
+.blue2 {
+  width: 92%;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-bottom: 4%;
+  background: rgb(166,233,255);
+  background: radial-gradient(circle, rgba(166,233,255,1) 0%, rgba(39,121,255,1) 100%);
+  height: 650px;
+  position: relative;
+  margin-top: 70px;
+  z-index: auto;
+  border-radius: 5px;
+  font-family: 'Roboto';
+}
+#blue3{
+  margin-top: 30px;
+  height: 450px;
+}
+
+.question {
+  position: absolute;
+  text-align: center;
+  width: 92%;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 2%;
+  background-color: #fff5f2;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.left, .right {
+    position: absolute;
+    margin-top: 10%;
+    background-color: #fff5f2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 15px;
+    border-radius: 5px;
+    font-size: 20px;
+    width: 42%;
+    height: 70%;
+}
+.left{
+  float: left;
+  margin-left: 4%;
+}
+.right{
+  margin-left: 52%;
+}
+
+.left:hover, .right:hover{
+  cursor: pointer;
+  background-color: white;
+}
+
+button {
+  height: 150px;
+  width: 200px;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  -ms-transform: translate(-50%, -15%);
+  transform: translate(-50%, -15%);
+  background-color: #fff5f2;
+  border-radius: 10px;
+  font-family: 'Roboto';
+  font-size: 30px;
+  box-shadow: 5px 5px #999;
+}
+
+button:hover {
+  box-shadow: 9px 9px #666;
+  cursor: pointer;
+
+}
+
+button:active{
+  position: absolute;
+  top: 16%;
+  -ms-transform: translate(-51%, -16%);
+  transform: translate(-51%, -16%);
+  box-shadow: 3px 5px #666;
+}
+
+.insta:active {
+  left: 51%;
+}
+
+.subscr {
+  left: 20%;
+}
+
+.subscr:active{
+  left: 21%;
+}
+
+.date {
+  left: 80%
+}
+
+.date:active {
+  left: 81%;
+}
+
+.twitter {
+  top: 55%;
+  left: 20%;
+}
+
+.twitter:active {
+  top: 56%;
+  left: 21%;
+}
+
+.youtube {
+  top: 55%;
+  left: 50%;
+}
+
+.youtube:active {
+  top: 56%;
+  left: 51%;
+}
+
+.twitch {
+  top: 55%;
+  left: 80%;
+}
+
+.twitch:active {
+  top: 56%;
+  left: 81%;
+}
+
+.mainMenu {
+  top: 35%;
+  left: 70%;
+  height: 175px;
+  width: 265px;
+}
+
+.mainMenu:active {
+  top: 36%;
+  left: 71%;
+}
+
+.instaDescr, .subscrDescr, .dateDescr, .twitterDescr, .youtubeDescr, .twitchDescr  {
+  height: 50px;
+  width: 140px;
+  position: absolute;
+  background-color: #d5ff87;
+  /* background-color: #ffd8cc; */
+  top: 52%;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.instaDescr {
+  left: 44.5%;
+}
+
+.subscrDescr {
+  left: 17.5%;
+}
+
+.dateDescr {
+  left: 72%;
+}
+
+.twitterDescr {
+  top: 92%;
+  left: 17.5%;
+}
+
+.youtubeDescr {
+  top: 92%;
+  left: 44.5%;
+}
+
+.twitchDescr {
+  top: 92%;
+  left: 72%;
+}
+
+p, div {
+  border-radius: 5px;
+  font-family: 'Roboto';
+}
+
+.descr {
+  margin-top: 100px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.endScore {
+  position: relative;
+  margin-top: 20px;
+  font-family: 'Roboto';
+  font-size: 20px;
+  text-align: center;
+}
+
+.scoreCircle {
+  height: 80px;
+  width: 7%;
+  position: absolute;
+  top: 90%;
+  left: 46.5%;
+  z-index: 30;
+  background-color: #91b849;
+  border-radius: 50%;
+  font-family: 'Roboto';
+  font-size: 20px;
+  /* transform: translate(690%, 90%); */
+}
+
+#left_name, #right_name {
+  font-size: 30px;
+}
